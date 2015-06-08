@@ -1,0 +1,1326 @@
+<!DOCTYPE html>
+<html lang="zh-cn">
+<head>
+    <meta name="renderer" content="webkit">
+    <meta http-equiv="Content-Type" content="text/html; charset=utf-8">
+    <meta name="viewport"
+          content="width=device-width, initial-scale=1.0, user-scalable=no, minimum-scale=1.0, maximum-scale=1.0">
+    <meta name="apple-mobile-web-app-capable" content="yes">
+    <meta name="apple-mobile-web-app-status-bar-style" content="black">
+    <meta name="format-detection" content="telephone=no"/>
+    <title id='#wx-title'>{$prname}</title>
+    <!--
+    <link type="text/css" rel="stylesheet" href="./css/style.css">
+    -->
+    <style type="text/css">
+        /* reset */
+        html {
+            color: #000;
+            background: #FFF;
+        }
+
+        blockquote, body, code, dd, div, dl, dt, fieldset, form, h1, h2, h3, h4, h5, h6, input, legend, li, ol, p, pre, td, textarea, th, ul {
+            margin: 0;
+            padding: 0;
+        }
+
+        table {
+            border-collapse: collapse;
+            border-spacing: 0;
+        }
+
+        fieldset, img {
+            border: 0;
+        }
+
+        address, caption, cite, code, dfn, em, strong, th, var {
+            font-style: normal;
+            font-weight: 400;
+        }
+
+        ol, ul {
+            list-style: none;
+        }
+
+        caption, th {
+            text-align: left;
+        }
+
+        h1, h2, h3, h4, h5, h6 {
+            font-size: 100%;
+            font-weight: 400;
+        }
+
+        q:after, q:before {
+            content: '';
+        }
+
+        abbr, acronym {
+            border: 0;
+            font-variant: normal;
+        }
+
+        sup {
+            vertical-align: text-top;
+        }
+
+        sub {
+            vertical-align: text-bottom;
+        }
+
+        input, select, textarea {
+            font-family: inherit;
+            font-size: inherit;
+            font-weight: inherit;
+            *font-size: 100%;
+        }
+
+        legend {
+            color: #000;
+        }
+
+        .clearfix {
+            *zoom: 1;
+        }
+
+        .clearfix:after {
+            content: "\00A0";
+            display: block;
+            visibility: hidden;
+            width: 0;
+            height: 0;
+            clear: both;
+            font-size: 0;
+            line-height: 0;
+            overflow: hidden;
+        }
+
+        body {
+            font: 12px/1.5 tahoma, arial, 'Hiragino Sans GB', '\5b8b\4f53', sans-serif;
+        }
+
+        a {
+            text-decoration: none;
+        }
+
+        a:hover {
+            text-decoration: underline;
+        }
+
+        img {
+            vertical-align: bottom;
+        }
+
+        .fl {
+            float: left;
+        }
+
+        .fr {
+            float: right;
+        }
+
+        /* page */
+        #top {
+
+            padding-top: 12px;
+            padding-left: 12px;
+        }
+
+        #top .title {
+            position: absolute;
+            font-size: 14px;
+            height: 40px;
+            width: 200px;
+            overflow: hidden;
+            margin-left: 15px;
+            margin-right: 15px;
+        }
+
+        #top .tit {
+            position: relative;
+            right: 20px;
+        }
+
+        #top .host {
+            color: #FE5B3A;
+            font-size: 14px;
+            position: relative;
+            right: 13px;
+        }
+
+        #top .pep {
+            color: #FE5B3A;
+            font-size: 14px;
+        }
+
+        /*进度条样式*/
+        .progressBar {
+            width: 75%;
+            height: 20px;
+            margin: 45px auto -45px auto;
+            position: relative;
+            bottom: 20px;
+            margin-left: 60px;
+            margin-right: auto;
+        }
+
+        .progressBar div {
+            position: absolute;
+        }
+
+        .progressBar .progressBac {
+            width: 100%;
+            height: 5px;
+            left: 0px;
+            top: 0;
+            background: #999999;
+            border-radius: 50px;
+        }
+
+        .progressBar .speed {
+            width: 0px;
+            height: 5px;
+            left: 0px;
+            background: #FF5B3D;
+            border-radius: 50px;
+        }
+
+        .progressBar .drag {
+            width: 20px;
+            height: 20px;
+            left: 0;
+            top: -9px;
+            background: #FF5B3D;
+            border-radius: 20px;
+            box-shadow: #fff 0 0 5px;
+        }
+
+        /*时间样式*/
+        #time {
+            width: 95%;
+            height: 32px;
+            position: relative;
+            left: 0;
+            bottom: 30px;
+            color: #888;
+        }
+
+        .tiemDetail {
+            position: absolute;
+            right: 0px;
+            top: 0;
+        }
+
+        /*播放样式*/
+        #control {
+            width: 50px;
+            height: 50px;
+            line-height: 30px;
+            text-align: center;
+            position: relative;
+            top: 20px;
+        }
+
+        .hide {
+            display: none;
+        }
+
+        .show {
+            display: block;
+        }
+
+        #main {
+
+        }
+
+        #main .blue {
+            position: relative;
+            left: 0px;
+        }
+
+        #main .red {
+            position: relative;
+            left: 10%;
+        }
+
+        #main .vs {
+            position: relative;
+            left: 5%;
+        }
+
+        #main .bluetit {
+            position: absolute;
+            z-indent: 2;
+            left: 10%;
+            top: 0;
+            color: #F1F9FD;
+            font-size: 12px;
+            height: 20px;
+            line-height: 15px;
+            width: 80px;
+            overflow: hidden;
+        }
+
+        #main .bluepem {
+            position: absolute;
+            z-indent: 2;
+            left: 69%;
+            top: 0;
+            color: #F1F9FD;
+            font-size: 12px;
+            height: 20px;
+            line-height: 15px;
+            width: 28px;
+            overflow: hidden;
+        }
+
+        #main .redtit {
+            position: absolute;
+            z-index: 2;
+            left: 31%;
+            top: 0;
+            color: #F1F9FD;
+            font-size: 12px;
+            height: 20px;
+            line-height: 15px;
+            width: 80px;
+            overflow: hidden;
+        }
+
+        #main .redpem {
+            position: absolute;
+            z-indent: 2;
+            left: 10%;
+            top: 0;
+            color: #F1F9FD;
+            font-size: 12px;
+            height: 20px;
+            line-height: 15px;
+            width: 28px;
+            overflow: hidden;
+        }
+
+        .commnet {
+            padding-top: 18px;
+            padding-left: 12px;
+            overflow: hidden;
+        }
+
+        .commnet .conx1 {
+            float: left;
+        }
+
+        .commnet .conx2 {
+            float: left;
+            padding-left: 12px;
+            width: 70%;
+            height: 20px;
+            overflow: hidden;
+        }
+
+        .commnet .conx3 {
+            float: right;
+            padding-right: 12px;
+        }
+
+        .commnet2 {
+            position: relative;
+            top: -10px;
+            left: 59px;
+            width: 70%;
+        }
+
+        .ziti1 {
+            color: #FE5B3A;
+            font-size: 14px;
+        }
+
+        .ziti2 {
+            color: #020202;
+            font-size: 12px;
+        }
+
+        .ziti3 {
+            color: #FE5B3A;
+            font-size: 12px;
+        }
+
+        .sond {
+            position: relative;
+            right: 65px;
+            top: -8px;
+        }
+
+        .sodt {
+            color: #7B8288;
+            font-size: 12px;
+        }
+
+        .hostx {
+            position: relative;
+            right: 15px;
+        }
+
+        .xian {
+            border-top: 1px solid #EAEAEA;
+            height: 1px;
+        }
+
+        #bottom {
+            background-color: #FF5B3D;
+            height: 35px;
+        }
+
+        #bottom .b_tit {
+            white-space: nowrap;
+            width: 80%;
+            margin-top: -1px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 15px;
+            color: #FFFFFF;
+            text-align: center;
+            text-indent: 10px;
+            line-height: 45px;
+            height: 45px;
+        }
+
+        #bottom .xianzai {
+            border-top: 1px solid #FFAD9D;
+            height: 1px;
+        }
+
+        #bottom .b_xia {
+            white-space: nowrap;
+            width: 60%;
+            margin-top: -1px;
+            margin-left: auto;
+            margin-right: auto;
+            font-size: 15px;
+            color: #FFFFFF;
+            text-align: center;
+        }
+
+        #bottom .ios {
+            float: left;
+            background-color: #FFFFFF;
+            color: #FE5B3A;
+            width: 80px;
+            height: 28px;
+            line-height: 28px;
+            margin-top: 10px;
+            text-align: center;
+            border-radius: 300px;
+        }
+
+        #bottom .and {
+            margin-top: 10px;
+            float: right;
+            background-color: #FFFFFF;
+            color: #FE5B3A;
+            width: 80px;
+            line-height: 28px;
+            height: 28px;
+            text-align: center;
+            border-radius: 300px;
+            text-decoration: none;
+
+        }
+    </style>
+    <style>
+        html,body{
+            height: 100%;
+            width: 100%;
+        }
+        .logoheader{
+            width: 100%;
+            height: 50px;
+            background-color: white;
+            -webkit-box-shadow: 1px 1px 1px #999999;
+            box-shadow: 1px 1px 1px #999999;
+            z-index: 1111;
+        }
+        .logo{
+            width:155px;
+            float: left;
+            height: 70%;
+            position: relative;
+            top: 7px;
+            left: 10px;
+        }
+        .btn{
+            height: 70%;
+            width:140px;
+            float: right;
+            position: relative;
+            top: 7px;
+            margin-right: 15px;
+
+        }
+        .btn .down{
+            width:70px;
+            height: 100%;
+            background-color: #ff5b3b;
+            -webkit-box-shadow: 0px 3px 5px #d2452a;
+            box-shadow: 0px 3px 2px #d2452a;
+            -webkit-border-radius: 4px;
+            border-radius:4px;
+            float: right;
+            color: white;
+            display: table;
+            text-align: center;
+            cursor: pointer;
+        }
+        .btn .down span{
+            display: table-cell;
+            vertical-align: middle;
+        }
+        .logo img{
+            height: 100%;
+        }
+        .login{
+            background-color:rgba(0,0,0,0.6);
+            display:none;
+            position: absolute;
+            left: 0;
+            left: 0px;
+            top: 0;
+            top:0px;
+            margin: 0 auto;
+            overflow-x:hidden;
+        }
+        .login #close{
+            float: right;
+        }
+        @media all and  (max-width:320px) {
+            .login{
+
+            }
+
+        }
+        .lghorizon{
+            clear: both;
+            margin: 20px auto 0 auto;
+            width:90%;
+            min-width: 300px;
+            max-width: 1024px;
+            background-color: rgba(255,255,255,0.95);
+            border-radius: 40px;
+            -webkit-border-radius: 40px;
+            height: 70px;
+        }
+        .login .lghorizon .icon{
+            width: 40px;
+            height:40px;
+            background-color: transparent;
+            position: relative;
+            top:15px;
+            left:40px;
+            float: left;
+        }
+        .login .lghorizon .icon img{
+            width: 40px;
+            height: 40px;
+        }
+        .login .lghorizon .tip{
+            min-width: 120px;
+            height: 100%;
+            float: right;
+            margin-right: 40px;
+            background-color: transparent;
+            font-size: 24px;
+            font-family: "微软雅黑","黑体","Heiti";
+            line-height: 24px;
+            text-align: center;
+        }
+        .tip span{
+            display: inline-block;
+            margin-top: 23px;
+        }
+        @media all and (min-width:320px) {
+            .login .lghorizon .tip{
+                width: 50%;
+            }
+        }
+        @media all and (min-width:420px) {
+            .login .lghorizon .tip{
+                width: 60%;
+            }
+        }
+        @media all and (min-width:540px) {
+            .login .lghorizon .tip{
+                width:70%;
+            }
+        }
+        .red{
+            background-color: red;
+        }
+        .reply{
+            width: 100%;
+            height: 50px;
+            display: none;
+            background-color: #363636;
+            position: fixed;
+            bottom: 0px;
+            bottom: 0;
+        }
+        .reply textarea{
+            //width:80%;
+            height:36px;
+            font-size: 32px;
+            line-height:32px;
+            position: relative;
+            top: 6px;
+            left: 6px;
+            border:1px solid #C3C3C3;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            resize: none;
+            background-color: #FFFFFF;
+            font-family: "微软雅黑","黑体","Heiti";
+        }
+        .reply textarea::-webkit-input-placeholder { /* WebKit browsers */
+            position: relative;
+            top: 6px;
+            display:inline-block;
+            color:#red;
+            font-size:24px;
+            line-height: 24px;
+            height: 24px;
+            text-align: left;
+            vertical-align: middle;
+        }
+        .reply .send{
+            float: right;
+            width:72px;
+            height:36px;
+            font-size: 32px;
+            line-height:32px;
+            position: relative;
+            top: 6px;
+            right: 12px;
+            border-radius: 3px;
+            -webkit-border-radius: 3px;
+            resize: none;
+            background-color: red;
+            color: white;
+            font-family: "微软雅黑","黑体","Heiti";
+        }
+    </style>
+    <script language="javascript" src="./jquery/jquery.js"></script>
+    <script type="text/javascript" src="./jquery/jquery.scrollLoading-min.js"></script>
+    <script>
+        /*页面显示、登陆及评论回复功能在此，by lgh*/
+        var bibiLogin = {
+            show:function(){
+                $(".login").css({
+                    width:$("html").width()*0.9+"px",
+                    height:$("html").height()*0.9+"px",
+                    left:$("html").width()*0.1/2+"px",
+                    top:$("html").height()*0.1/2+"px",
+                    display:"block"
+                })
+                if(document.body.clientWidth<=320){
+                    $(".login").css({
+                            "width": $("html").width(),
+                            left:"0px",
+                            top:"0px"
+                        }
+                    );
+                };
+            },
+            hide: function(){
+                $(".login").hide();
+            },isLogin:function(){ //对是否已登陆进行判断。可以用php中的session或cookie判断
+              if(true){
+                  return 1;
+              } else{
+                  return 0;
+              }
+            },
+            replyShow:function(){
+                $(".reply").show(300);
+            },
+            replyHide:function(){
+                $(".reply").hide(0);
+            },
+            replyWidth:function(){
+                $(".reply textarea").css("width",($("html").width()-6-12-72-10)+"px");
+            }
+        }
+
+        jQuery(document).ready(function($){
+            //bibiLogin.show();
+            bibiLogin.replyWidth();
+            $("img#close").click(bibiLogin.hide);
+            $(".logoheader .down").click(function () {
+                var bUA = window.navigator.userAgent;
+                //console.log(bUA);
+                if(bUA.indexOf("Android")>=0){
+                    window.location.href = "http://bibi123.com.cn/appdownloads/local.html";
+                }else if(bUA.indexOf("iPhone")>=0){
+                    window.location.href = "https://itunes.apple.com/app/id947205428";
+                }else if(bUA.indexOf("iPad")>=0){
+                    window.location.href = "https://itunes.apple.com/app/id947205428";
+                }else{
+                    alert("抱歉，暂不支持您的手机系统！");
+                }
+            });
+
+
+            $(window).resize(function(){
+                if($(".login").is(":visible")) {
+                    bibiLogin.show();
+                }
+                bibiLogin.replyWidth();
+            });
+
+            $(window).scroll(function () {
+                var s=document.body.scrollTop||document.documentElement.scrollTop;
+                if(s>$(".logoheader").height()){
+                    $(".logoheader").css("position","fixed");
+                    $(".logoheader").next("div").css({"position":"relative","top":$(".logoheader").height()+"px"});
+                }else{
+                    $(".logoheader").css("position","static");
+                    $(".logoheader").next("div").css({"position":"static"});
+                }
+            });
+
+            var replyid = 0;
+            /*$(".commnet,.commnet2").click(function () {
+                //回复区域展开
+                bibiLogin.replyShow();
+                $(".reply").addClass("replying");
+                $("#bottom").css("height","85px");
+
+                replyid = +$(this).attr("data-replyid");
+            });*/
+
+            //输入完毕评论后，点击发送按钮
+            $(".send").click(function(){
+                if(!bibiLogin.isLogin())
+                { //判断是否登陆 TODO
+                    $.ajax({
+                        type: "POST",
+                        url: "",
+                        data: {
+                            reply:$(".reply textarea").val()+"",
+                            replyid:replyid
+                        },
+                        success: function(msg){
+                                //保存成功，然后呢？刷新页面？
+
+                        }
+
+                    });
+
+                }else{ //如果没有登录
+                    //显示登陆页面
+                    bibiLogin.show();
+
+                }
+
+            });
+        });
+
+    </script>
+</head>
+
+<script>
+    /*音频播放相关逻辑均在此*/
+    var audio;
+    var drag;
+    var speed;
+    $(function () {
+        $("img").load(function () {
+            //图片默认隐藏
+            $(this).hide();
+            //使用fadeIn特效
+            $(this).fadeIn("5000");
+        });
+        // 异步加载图片，实现逐屏加载图片
+        $(".scrollLoading").scrollLoading({
+            callback: function() {
+                var t = false;
+                t = ($(this).attr("src").indexOf(".png")>0)
+                    ||
+                    ($(this).attr("src").indexOf(".jpg")>0)
+                    ||
+                    ($(this).attr("src").indexOf(".gif")>0)
+                    ||
+                    ($(this).attr("src").indexOf(".jpeg")>0);
+
+               if(t){
+
+               }else{
+                   $(this).attr("src","./public/images/share/0_0.png");
+               }
+            }
+        });
+        getSong();
+        drag = document.getElementById("drag");
+        speed = document.getElementById("speed");
+        audio.addEventListener("pause",
+                function () { //监听暂停
+                    $("#control").addClass("play").removeClass("pause");
+                    $("#control").html("<img src='./public/images/pplay.png' width='35px'>");
+                    clearInterval(dragMoveIntervalId);
+                    if (audio.currentTime == audio.duration) {
+                        //audio.stop();
+                        audio.currentTime = 0;
+                    }
+                }, false);
+        audio.addEventListener("play",
+                function () { //监听播放
+                    $("#control").addClass("pause").removeClass("play");
+                    $("#control").html("<img src='./public/images/ppuse.png' width='35px'>");
+                    clearInterval(dragMoveIntervalId);
+                    dragMove();
+                }, false);
+        audio.addEventListener("ended", function () {
+            clearInterval(dragMoveIntervalId);
+        }, false);
+    });
+
+    //获取歌曲链接并插入dom中
+    function getSong() {
+        audio = document.getElementById("audio");
+        var a = $('#programmp3').val();
+        audio.src = a;
+        audio.loop = true; //歌曲循环
+        // playCotrol(); //播放控制函数
+    }
+
+    //点击播放/暂停
+    function clicks() {
+        //var audio = document.getElementById("audio");
+        $("#control").click(function () {
+            if ($("#control").hasClass("play")) {
+                audio.play();//开始播放
+                //dragMove();//并且滚动条开始滑动
+            } else if ($("#control").hasClass("pause")) {
+                audio.pause();
+
+            }
+        })
+    }
+
+    //播放时间
+    function timeChange(time, timePlace) {      //默认获取的时间是时间戳改成我们常见的时间格式
+        var timePlace = document.getElementById(timePlace);
+        //分钟
+        var minute = time / 60;
+        var minutes = parseInt(minute);
+        if (minutes < 10) {
+            minutes = "0" + minutes;
+        }
+        //秒
+        var second = time % 60;
+        seconds = parseInt(second);
+        if (seconds < 10) {
+            seconds = "0" + seconds;
+        }
+        var allTime = "" + minutes + "" + ":" + "" + seconds + ""
+        timePlace.innerHTML = allTime;
+    }
+
+    //播放事件监听
+    function playCotrol() {
+        // audio.addEventListener("loadeddata", //歌曲一经完整的加载完毕( 也可以写成上面提到的那些事件类型)
+        //     function() {
+        //$("#control").addClass("play");
+        //$("#control").html("<img src='./public/images/pplay.png' width='35px'>");
+        if ($("#control").hasClass("play") || $("#control").hasClass("pause")) {
+            removeListenTouch();
+            addListenTouch();
+        } else {
+            addListenTouch(); //歌曲加载之后才可以拖动进度条
+        }
+
+        var allTime = audio.duration;
+        if (isNaN(allTime)) {
+            allTime = 0;
+        }
+        timeChange(allTime, "allTime");
+        audio.play();
+
+        if (tmpTimeIntervalInt) {
+            clearInterval(tmpTimeIntervalInt);
+        }
+        var tmpTimeIntervalInt = setInterval(function () {
+            var currentTime = audio.currentTime;
+            $("#time .currentTime").html(timeChange(currentTime, "currentTime"));
+        }, 1000);
+        clicks();
+        //   }, false);
+
+
+    }
+
+    //进度条
+    //这里我用的是事件实现进度拖动 如果不太熟悉touch的可以看下我之前写的一个小demo http://www.cnblogs.com/leinov/p/3701951.html
+    var startX, x, aboveX = 0; //触摸时的坐标 //滑动的距离  //设一个全局变量记录上一次内部块滑动的位置
+
+    //1拖动监听touch事件
+    function addListenTouch() {
+        drag.addEventListener("touchstart", touchStart, false);
+        drag.addEventListener("touchmove", touchMove, false);
+        drag.addEventListener("touchend", touchEnd, false);
+    }
+    function removeListenTouch() {
+        drag.removeEventListener("touchstart");
+        drag.removeEventListener("touchmove");
+        drag.removeEventListener("touchend");
+    }
+
+    //touchstart,touchmove,touchend事件函数
+    function touchStart(e) {
+        e.preventDefault();
+
+        clearInterval(dragMoveIntervalId);
+        var touch = e.touches[0];
+        startX = touch.pageX;
+        aboveX = current_width;//触摸时的播放进度条长度
+    }
+    var tempDragLeft = 0;
+    function touchMove(e) { //滑动
+        e.preventDefault();
+        var touch = e.touches[0];
+        x = touch.pageX - startX; //滑动的距离
+        //drag.style.webkitTransform = 'translate(' + 0+ 'px, ' + y + 'px)';  //也可以用css3的方式
+
+        tempDragLeft = aboveX + x;
+        if (tempDragLeft + 10 > Bar_width) {
+            tempDragLeft = Bar_width - 10;
+            audio.loop = false;
+        }
+        if (tempDragLeft <= 0) {
+            tempDragLeft = 0;
+        }
+        drag.style.left = tempDragLeft + "px"; //
+        speed.style.width = tempDragLeft + "px";
+    }
+    function touchEnd(e) { //手指离开屏幕
+        e.preventDefault();
+        //aboveX = parseInt(drag.style.left);
+        var touch = e.touches[0];
+        /*var dragPaddingLeft = drag.style.left;
+         var change = dragPaddingLeft.replace("px", "");
+         numDragpaddingLeft = parseInt(change);*/
+        var currentTime = (tempDragLeft / (Bar_width )) * audio.duration;//30是拖动圆圈的长度，减掉是为了让歌曲结束的时候不会跑到window以外
+        audio.currentTime = currentTime;
+        dragMove();
+    }
+    //3拖动的滑动条前进
+    var dragMoveIntervalId = 0;
+    var Bar_width = 0;
+    var current_width = 0;
+    function dragMove() {
+        Bar_width = $(".progressBar").width();//+130;	//获得进度条总宽度
+
+        dragMoveIntervalId = setInterval(function () {
+            current_width = (audio.currentTime / audio.duration) * (Bar_width);
+            //var speed_width = ((audio.currentTime / audio.duration) * 100) + '%';
+            //var speed_width = ((current_width / Bar_width) * 100) + '%';
+            drag.style.left = current_width + "px";
+            speed.style.width = current_width + "px";
+        }, 500);
+    }
+
+    var currPureSoundIntervalId = 0;
+    //下方用户语音留言、回复播放方法
+    function startmusic(obj, url) {
+
+        if (url == '') {
+            return false;//防止音频插件崩溃
+        }
+        //暂停上方播放中的语音
+        //var audio = document.getElementById("audio");
+        $("#control").addClass("play").removeClass("pause");
+        $("#control").html("<img src='./public/images/pplay.png' width='35px'>");
+        audio.pause();
+        if(document.getElementById("sound2")){
+            document.getElementById("sound2").pause();
+        }
+
+        $(".commnet2 img").not($(obj)).removeClass("soundPlaying");
+        clearInterval(currPureSoundIntervalId);
+        clearInterval(currImgSoundIntervalId);
+        $(".sond").html('<img src="./public/images/s3.png" width="10px"/>');	//先重置所用状态
+
+
+        var audioEle = document.getElementById("sound");
+
+        if(audioEle.src == undefined || audioEle.src == ""){
+            audioEle.addEventListener('ended', function () {
+                window.clearInterval(currPureSoundIntervalId);
+                $(".commnet2 img").removeClass("soundPlaying");
+                $(obj).parent().find(".sond").html('<img src="./public/images/s3.png" width="10px"/>');	//先重置所用状态
+            }, false);
+        }
+
+        audioEle.src = url;
+
+        if($(obj).hasClass("soundPlaying")){
+            audioEle.pause();
+            clearInterval(currPureSoundIntervalId);
+            $(obj).removeClass("soundPlaying");
+        }else{
+            audioEle.play();
+            currPureSoundIntervalId = window.setInterval(imgfor, 500);
+            $(obj).addClass("soundPlaying");
+        }
+
+
+        //播放中 声音传播弧形图标 图片轮换效果
+        var imgnumb = 0;
+        function imgfor() {
+            imgnumb++;
+            $con = '<img src="./public/images/s' + imgnumb + '.png" width="10px"/>';
+            $(obj).next().html($con);
+            if (imgnumb == 3) {
+                imgnumb = 0;
+            }
+        }
+    }
+
+    var currImgSoundIntervalId = 0;
+    //有图片的语音回复
+    function starttupian(obj, url) {
+
+        if (url == '') {
+            return false;//防止音频插件崩溃
+        }
+        //暂停上方播放中的语音
+        //var audio = document.getElementById("audio");
+        $("#control").addClass("play").removeClass("pause");
+        $("#control").html("<img src='./public/images/pplay.png' width='35px'>");
+        audio.pause();
+        if(document.getElementById("sound")){
+            document.getElementById("sound").pause();
+        }
+
+        $(".commnet2 img").not($(obj)).removeClass("soundPlaying");
+        clearInterval(currPureSoundIntervalId);
+        clearInterval(currImgSoundIntervalId);
+        $(".tu").html('<img src="./public/images/c3.png" width="21px"/>');	//先重置所用状态
+
+        var audioEle = document.getElementById("sound2");
+
+
+        if(audioEle.src == undefined || audioEle.src == "") {
+            audioEle.addEventListener('ended', function () {
+                window.clearInterval(currImgSoundIntervalId);
+                $(".commnet2 img").removeClass("soundPlaying");
+                $(".tu").html('<img src="./public/images/c3.png" width="21px"/>');	//先重置所用状态
+            }, false);
+        }
+
+
+        audioEle.src = url;
+        if($(obj).hasClass("soundPlaying")){
+            audioEle.pause();
+            clearInterval(currImgSoundIntervalId);
+            $(obj).removeClass("soundPlaying");
+        }else{
+            audioEle.play();
+            currImgSoundIntervalId = window.setInterval(imgfor, 500);
+            $(obj).addClass("soundPlaying");
+        }
+        //图片轮换/多张
+
+
+        var imgnumb = 0;
+
+        function imgfor() {
+            imgnumb++;
+            $con = '<img src="./public/images/c' + imgnumb + '.png" width="21px"/>';
+            $(obj).next().html($con);
+            if (imgnumb == 3) {
+                imgnumb = 0;
+            }
+        }
+
+
+    }
+</script>
+<body>
+<div class="logoheader">
+    <div class="logo">
+        <img src="./public/images/share/logo_06.png"/>
+    </div>
+    <div class="btn">
+        <div class="down"><span>下载APP</span></div>
+    </div>
+</div>
+<div>
+    <!--audiostart-->
+    <audio id="audio" src="" preload="metadata" loop="loop"></audio>
+    <!--audio End-->
+    <!--头部-->
+    <div id='top'>
+        <foreach name='re' item='vi'>
+            <div class='header'>
+                <img class="scrollLoading" data-url='./{$vi.userpic}' src="./public/images/share/0_0.png" width="59px">
+                <span class='title' id='wx-con'>{$vi.info}</span>
+                <span style="display:none"><img class="scrollLoading" data-url='./{$vi.pic}' src='./public/images/share/0_0.png'
+                                                id='wx-img'></span>
+                <span class='tit'><img src='./public/images/tit.png' width="20px"></span>
+                <span class='host'>{$vi.anchor}</span>
+                <input type="hidden" id='programmp3' value="./{$vi.mp3}"/>
+                <!--时间进度条块儿start-->
+                <div class="progressBar">
+                    <div class="progressBac"></div>
+                    <div class="speed" id="speed"></div>
+                    <div class="drag" id="drag"></div>
+                </div>
+                <!--时间进度条块儿end-->
+                <!--播放时间start-->
+                <div id="time">
+                    <div class="tiemDetail">
+                        <span class="currentTime" id="currentTime">00:00</span>/
+                        <span class="allTime" id="allTime">00:00</span>
+                    </div>
+                    <!--播放时间end-->
+                    <!--播放控制按钮start-->
+                    <div id="control" class="" onclick='playCotrol()'><img src='./public/images/pplay.png' width='35px'>
+                    </div>
+                    <!--播放控制按钮end-->
+                </div>
+                <div style='border-top:1px solid #E5E5E5;margin-left:-12px;'></div>
+                <div><span class='pep'>{$vi.total}</span> 参与</div>
+            </div>
+        </foreach>
+    </div>
+    <!--中部-->
+    <div id='main'>
+        <foreach name='re' item='vi'>
+            <eq name='vi.is_talk' value='1'> <!--是否討論節目-->
+		<span class='blue'><img src='./public/images/blue.png' width='39%' height='20px'/>
+			<span class='bluetit'>{$vi.The_blue}</span>
+			<foreach name='talk_num' item='num'>
+                <span class='bluepem'>{$num.blue_num}</span>
+		</span>
+                <span class='vs'><img src='./public/images/vs.png' width='10%' height='20px'/></span>
+		<span class='red' style="background-color: transparent;"><img src='./public/images/red.png' width='39%' height='20px'/>
+			<span class='redpem'>{$num.red_num}</span>
+        </foreach>
+        <span class='redtit'>{$vi.The_red}</span>
+        </span>
+        <else/>
+        <!--不是討論節目什麼都不輸出-->
+        </eq>
+        <!--中部内容区-->
+        <foreach name='me' item='ve'>
+            <if condition="($ve.host eq 1) and ($ve.reid neq 0) ">
+                <div class='commnet' style='padding-left:40px;'  data-replyid="44444">
+                    <else/>
+                    <div class='commnet'  data-replyid="33333">
+            </if>
+            <div class='conx1'>
+                <img class="scrollLoading" data-url='./{$ve.userpic}' src="./public/images/share/0_0.png" width="34px">
+                <if condition="($ve.host eq 1)">
+                    <span class='hostx'><img src='./public/images/tit.png' width="15px"></span>
+                </if>
+            </div>
+            <div class='conx2'>
+                <!--是否討論節目-->
+                <eq name='vi.is_talk' value='1'>
+                    <!--红蓝方路人的判断-->
+                    <eq name="ve.usergroup" value="0">
+                        <img src='./public/images/luren.png' width="35px">
+                    </eq>
+                    <eq name="ve.usergroup" value="1">
+                        <img src='./public/images/redx1.png' width="35px">
+                    </eq>
+                    <eq name="ve.usergroup" value="2">
+                        <img src='./public/images/bluex1.png' width="35px">
+                    </eq>
+                    <else/>
+                    <!--不输出-->
+                </eq>
+                <!--是否回复-->
+                <neq name='ve.reid' value='0'>
+							<span class='ziti1'>{$ve.nickname}
+							<span class='ziti2'>回复</span>
+							<span class='ziti3'>{$ve.renickname}</span>
+						<else/>
+							<span class='ziti1'>{$ve.nickname}</span>
+                </neq>
+            </div>
+    </div>
+                <if condition="($ve.host eq 1) and ($ve.reid neq 0) ">
+            <div class='commnet2' style='padding-left:30px;' data-replyid="11111" data-id="{$ve.userid}">
+            <else/>
+            <div class='commnet2'  data-replyid="22222" data-id="{$ve.userid}" >
+                </if>
+                <!--评论类型-->
+                <eq name="ve.issound" value="0"><!--文字-->
+                    {$ve.text}
+                </eq>
+                <eq name="ve.issound" value="1"><!--语音-->
+                    <img src='./public/images/soundx.png' width="70px" onclick="startmusic(this,'{$ve.mp3}')"/>
+                    <span class='sond'><img src='./public/images/s3.png' width="10px"/></span>
+                </eq>
+                <eq name="ve.issound" value="2"><!--图片语音-->
+                    <img class="scrollLoading" data-url='./{$ve.text.pic}' src='' width="86px"
+                         onclick="starttupian(this,'{$ve.text.mp3}')">
+                    <span class='tu'><img src='./public/images/c3.png' width="21px"></span>
+                </eq>
+
+                <div class='sodt'>{$ve.time|date='m-d H:i',###}</div>
+            </div>
+            <if condition="($ve.host eq 1) and ($ve.reid neq 0) ">
+                <div class='xian' style='width:80%;margin-left:auto;margin-right:auto;border-top:1px dashed #EAEAEA;'></div>
+                <else/>
+                <div class='xian'></div>
+            </if>
+
+            </foreach>
+            </foreach>
+            <audio id='sound' src=''></audio>
+            <audio id='sound2' src=''></audio>
+            <!--内容区结束-->
+            </div>
+<!--下部-->
+<div id='bottom'>
+    <div class='b_tit'>看更多牛哔神回复，请下载哔哔FM</div>
+    <!--<div class='xianzai'></div>-->
+    <!--<div class='b_xia'>
+        <a href="http://a.app.qq.com/o/simple.jsp?pkgname=com.bb.bbdiantai&g_f=991653" target='_blank'>
+            <div class='ios'>IOS下载</div>
+        </a>
+        <a href='http://bibi123.com.cn/appdownloads/local.html'>
+            <div class='and'>安卓下载</div>
+        </a>
+    </div>-->
+</div>
+</div>
+<div class="login">
+    <img id="close" src="__PUBLIC__/images/share/login-close.png" height="23px" alt=""/>
+    <div class="lghorizon">
+        <div class="icon"><img src="__PUBLIC__/images/share/weixinicon.png" alt=""/></div>
+        <div class="tip"><span>微信登陆</span></div>
+    </div>
+    <div class="lghorizon">
+        <div class="icon"><img src="__PUBLIC__/images/share/weiboicon.png" alt=""/></div>
+        <div class="tip"><span>微博登陆</span></div>
+    </div>
+    <div class="lghorizon">
+        <div class="icon"><img src="__PUBLIC__/images/share/qqicon.png" alt=""/></div>
+        <div class="tip"><span>QQ登陆</span></div>
+    </div>
+    <div class="lghorizon">
+        <div class="icon"><img src="__PUBLIC__/images/share/mobileicon.png" alt=""/></div>
+        <div class="tip"><span>手机登陆</span></div>
+    </div>
+    <div class="lghorizon red">
+        <!--<div class="icon"></div>-->
+        <div class="tip" style="margin: 0 auto;float: none;color: #ffffff"><span>注册</span></div>
+    </div>
+</div>
+<div class="reply">
+    <textarea name="reply" id="reply" placeholder="评论"></textarea>
+    <div class="send">发送</div>
+</div>
+</body>
+<script src="http://res.wx.qq.com/open/js/jweixin-1.0.0.js"></script>
+<script>
+    /*
+     * 注意：
+     * 1. 所有的JS接口只能在公众号绑定的域名下调用，公众号开发者需要先登录微信公众平台进入“公众号设置”的“功能设置”里填写“JS接口安全域名”。
+     * 2. 如果发现在 Android 不能分享自定义内容，请到官网下载最新的包覆盖安装，Android 自定义分享接口需升级至 6.0.2.58 版本及以上。
+     * 3. 常见问题及完整 JS-SDK 文档地址：http://mp.weixin.qq.com/wiki/7/aaa137b55fb2e0456bf8dd9148dd613f.html
+     *
+     * 开发中遇到问题详见文档“附录5-常见错误及解决办法”解决，如仍未能解决可通过以下渠道反馈：
+     * 邮箱地址：weixin-open@qq.com
+     * 邮件主题：【微信JS-SDK反馈】具体问题
+     * 邮件内容说明：用简明的语言描述问题所在，并交代清楚遇到该问题的场景，可附上截屏图片，微信团队会尽快处理你的反馈。
+     */
+    wx.config({
+        debug: false,
+        appId: '{$appId}',
+        timestamp: {$timestamp},
+        nonceStr: '{$nonceStr}',
+        signature: '{$signature}',
+        jsApiList: [
+            // 所有要调用的 API 都要加到这个列表中
+            'checkJsApi',
+            'onMenuShareTimeline',
+            'onMenuShareAppMessage',
+            'onMenuShareQQ',
+            'onMenuShareWeibo',
+            'hideMenuItems',
+            'showMenuItems',
+
+            'downloadImage',
+            'hideOptionMenu'
+        ]
+    });
+    wx.ready(function () {
+        var tit = $('#wx-title').html(); //标题
+        var img = $('#wx-img')[0].src; //图片
+        var con = $('#wx-con').html(); //简介
+
+        wx.showOptionMenu();
+        // 2. 分享接口
+        // 2.1 监听“分享给朋友”，按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareAppMessage({
+            title: tit,
+            desc: con,
+            imgUrl: img,
+            trigger: function (res) {
+                //alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                //		        alert('已分享');
+            },
+            cancel: function (res) {
+                //		        alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+        // 2.2 监听“分享到朋友圈”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareTimeline({
+            title: tit,
+            desc: con,
+            imgUrl: img,
+            trigger: function (res) {
+                //		        alert('用户点击分享到朋友圈');
+            },
+            success: function (res) {
+                //		        alert('已分享');
+            },
+            cancel: function (res) {
+                //		        alert('已取消');
+            },
+            fail: function (res) {
+                //alert(JSON.stringify(res));
+            }
+        });
+        // 2.3 监听“分享到QQ”按钮点击、自定义分享内容及分享结果接口
+        wx.onMenuShareQQ({
+            title: tit,
+            desc: con,
+            imgUrl: img,
+            trigger: function (res) {
+                //		        alert('用户点击分享到QQ');
+            },
+            complete: function (res) {
+                //alert(JSON.stringify(res));
+            },
+            success: function (res) {
+                //alert('已分享');
+            },
+            cancel: function (res) {
+                // alert('已取消');
+            },
+            fail: function (res) {
+                // alert(JSON.stringify(res));
+            }
+        });
+    });
+</script>
+</html>
